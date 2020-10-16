@@ -1,0 +1,11 @@
+sftp-config*.json
+*.py[cod]
+/.idea/*
+*.o*
+*.err*
+.DS_Store
+submit_jobs_jade_*.py
+/jobs_dir/
+/slowfast_*/
+/experiments/
+/scores/

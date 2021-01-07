@@ -1,4 +1,15 @@
 from .video_record import VideoRecord
+from datetime import timedelta
+import time
+
+
+def timestamp_to_sec(timestamp):
+    x = time.strptime(timestamp, '%H:%M:%S.%f')
+    sec = float(timedelta(hours=x.tm_hour,
+                          minutes=x.tm_min,
+                          seconds=x.tm_sec).total_seconds()) + float(
+        timestamp.split('.')[-1]) / 100
+    return sec
 
 
 class EpicKitchensVideoRecord(VideoRecord):
@@ -16,11 +27,11 @@ class EpicKitchensVideoRecord(VideoRecord):
 
     @property
     def start_frame(self):
-        return self._series['start_frame'] - 1
+        return int(round(timestamp_to_sec(self._series['start_timestamp']) * self.fps))
 
     @property
     def end_frame(self):
-        return self._series['stop_frame'] - 2
+        return int(round(timestamp_to_sec(self._series['stop_timestamp']) * self.fps))
 
     @property
     def fps(self):

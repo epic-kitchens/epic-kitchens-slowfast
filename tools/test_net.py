@@ -100,9 +100,13 @@ def perform_test(test_loader, model, test_meter, cfg):
                         [preds[1], labels['noun'], video_idx]
                     )
                     meta = du.all_gather_unaligned(meta)
-                metadata = {'narration_id': []}
-                for i in range(len(meta)):
-                    metadata['narration_id'].extend(meta[i]['narration_id'])
+                    metadata = {'narration_id': []}
+                    for i in range(len(meta)):
+                        metadata['narration_id'].extend(meta[i]['narration_id'])
+                else:
+                    metadata = meta
+                    verb_preds, verb_labels, video_idx = preds[0], labels['verb'], video_idx
+                    noun_preds, noun_labels, video_idx = preds[1], labels['noun'], video_idx
                 test_meter.iter_toc()
                 # Update and log stats.
                 test_meter.update_stats(

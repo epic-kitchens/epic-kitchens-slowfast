@@ -231,8 +231,8 @@ def test(cfg):
 
     if du.is_master_proc():
         if cfg.TEST.DATASET == 'epickitchens':
-            results = {'scores': {'verb': preds[0], 'noun': preds[1]},
-                       'labels': {'verb': labels[0], 'noun': labels[1]},
+            results = {'verb_output': preds[0],
+                       'noun_output': preds[1],
                        'narration_id': metadata}
             scores_path = os.path.join(cfg.OUTPUT_DIR, 'scores')
             if not os.path.exists(scores_path):

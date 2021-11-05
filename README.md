@@ -36,9 +36,10 @@ and
 ```
 
 
-## Pretrained model
+## Pretrained models
 
-You can download our pretrained model on EPIC-KITCHENS-100 from [this link](https://www.dropbox.com/s/uxb6i2xkn91xqzi/SlowFast.pyth?dl=0)
+- You can download our pretrained model on EPIC-KITCHENS-100 from [this link](https://www.dropbox.com/s/uxb6i2xkn91xqzi/SlowFast.pyth?dl=0)
+- You can download the Kinetics-400 pretrained model provided by the authors of SlowFast in [this link](https://dl.fbaipublicfiles.com/pyslowfast/model_zoo/kinetics400/SLOWFAST_8x8_R50.pkl)
 
 ## Preparation
 
@@ -85,7 +86,7 @@ To train the model run:
 ```
 python tools/run_net.py --cfg configs/EPIC-KITCHENS/SLOWFAST_8x8_R50.yaml NUM_GPUS num_gpus 
 OUTPUT_DIR /path/to/output_dir EPICKITCHENS.VISUAL_DATA_DIR /path/to/dataset 
-EPICKITCHENS.ANNOTATIONS_DIR /path/to/annotations
+EPICKITCHENS.ANNOTATIONS_DIR /path/to/annotations TRAIN.CHECKPOINT_FILE_PATH /path/to/SLOWFAST_8x8_R50.pkl
 ```
 To validate the model run:
 ```
@@ -98,7 +99,8 @@ After tuning the model's hyperparams using the validation set, we train the mode
 ```
 python tools/run_net.py --cfg configs/EPIC-KITCHENS/SLOWFAST_8x8_R50.yaml NUM_GPUS num_gpus 
 OUTPUT_DIR /path/to/output_dir EPICKITCHENS.VISUAL_DATA_DIR /path/to/dataset 
-EPICKITCHENS.ANNOTATIONS_DIR /path/to/annotations EPICKITCHENS.TRAIN_PLUS_VAL True
+EPICKITCHENS.ANNOTATIONS_DIR /path/to/annotations EPICKITCHENS.TRAIN_PLUS_VAL True 
+TRAIN.CHECKPOINT_FILE_PATH /path/to/SLOWFAST_8x8_R50.pkl
 ```
 To obtain scores on the test set (using the model trained on the concatenation of the training and validation sets) run:
 ```

@@ -55,18 +55,18 @@ def train_epoch(train_loader, model, optimizer, train_meter, cur_epoch, cfg):
             labels = {k: v.cuda() for k, v in labels.items()}
         else:
             labels = labels.cuda()
-        for key, val in meta.items():
-            if isinstance(val, (list,)):
-                for i in range(len(val)):
-                    val[i] = val[i].cuda(non_blocking=True)
-            else:
-                meta[key] = val.cuda(non_blocking=True)
 
         # Update the learning rate.
         lr = optim.get_epoch_lr(cur_epoch + float(cur_iter) / data_size, cfg)
         optim.set_lr(optimizer, lr)
 
         if cfg.DETECTION.ENABLE:
+            for key, val in meta.items():
+                if isinstance(val, (list,)):
+                    for i in range(len(val)):
+                        val[i] = val[i].cuda(non_blocking=True)
+                else:
+                    meta[key] = val.cuda(non_blocking=True)
             # Compute the predictions.
             preds = model(inputs, meta["boxes"])
 
@@ -227,14 +227,14 @@ def eval_epoch(val_loader, model, val_meter, cur_epoch, cfg):
             labels = {k: v.cuda() for k, v in labels.items()}
         else:
             labels = labels.cuda()
-        for key, val in meta.items():
-            if isinstance(val, (list,)):
-                for i in range(len(val)):
-                    val[i] = val[i].cuda(non_blocking=True)
-            else:
-                meta[key] = val.cuda(non_blocking=True)
 
         if cfg.DETECTION.ENABLE:
+            for key, val in meta.items():
+                if isinstance(val, (list,)):
+                    for i in range(len(val)):
+                        val[i] = val[i].cuda(non_blocking=True)
+                else:
+                    meta[key] = val.cuda(non_blocking=True)
             # Compute the predictions.
             preds = model(inputs, meta["boxes"])
 

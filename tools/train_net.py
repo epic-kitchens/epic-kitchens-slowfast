@@ -364,7 +364,7 @@ def train(cfg):
         misc.log_model_info(model, cfg, is_train=True)
 
     if cfg.BN.FREEZE:
-        model.module.freeze_fn('bn_statistics') if cfg.NUM_GPUS > 1 else model.freeze_fn('bn_statistics')
+        model.module.freeze_fn('bn_parameters') if cfg.NUM_GPUS > 1 else model.freeze_fn('bn_parameters')
 
     # Construct the optimizer.
     optimizer = optim.construct_optimizer(model, cfg)

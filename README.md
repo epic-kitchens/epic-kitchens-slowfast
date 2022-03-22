@@ -46,7 +46,7 @@ and
 - Please install all the requirements found in the original SlowFast repo ([link](https://github.com/facebookresearch/SlowFast/blob/master/INSTALL.md))
 * Add this repository to $PYTHONPATH.
 ```
-export PYTHONPATH=/path/to/SlowFast/slowfast:$PYTHONPATH
+export PYTHONPATH=/path/to/epic-kitchens-slowfast/slowfast:$PYTHONPATH
 ```
 * From the annotation repository of EPIC-KITCHENS-100 ([link](https://github.com/epic-kitchens/epic-kitchens-100-annotations)), download: EPIC_100_train.pkl, EPIC_100_validation.pkl, and EPIC_100_test_timestamps.pkl. EPIC_100_train.pkl and EPIC_100_validation.pkl will be used for training/validation, while EPIC_100_test_timestamps.pkl will be used to obtain the scores to submit in the AR challenge.
 * Download only the RGB frames of EPIC-KITCHENS-100 dataset using the download scripts found [here](https://github.com/epic-kitchens/epic-kitchens-download-scripts). 
